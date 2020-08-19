@@ -7,4 +7,12 @@ open class User () {
     lateinit var email: String
 
 
+    fun save(user:User){
+
+    }
+
+    fun delete(id:Int){
+
+    }
+
 }

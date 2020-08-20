@@ -1,4 +1,4 @@
-package com.sup.yoda.view
+package com.sup.yoda.controller
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

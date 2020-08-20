@@ -16,4 +16,8 @@ class UserController() {
         user.save(userTemp)
     }
 
+    fun getUser(){
+
+    }
+
 }

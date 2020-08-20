@@ -12,7 +12,7 @@ open class User () {
 
 
     fun save(user:User){
-
+        userDao.insertUser(user.nome, user.email)
     }
 
     fun delete(id:Int){

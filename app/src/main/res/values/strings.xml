@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">yoda</string>
+    <string name="digite_email">Seu digite Email:</string>
+    <string name="start">Começar</string>
 </resources>

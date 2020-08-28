@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">yoda</string>
-    <string name="type_it_email">Seu digite Email:</string>
+    <string name="type_it_email">Seu digite email:</string>
     <string name="start">Começar</string>
     <string name="invalid_user">Encontrado foi não você!</string>
     <string name="welcome">Vindo Bem Seja!</string>
+    <string name="authenticated_user">AUTHENTICATED_USER</string>
+    <string name="type_it_code">Código digite seu:</string>
 </resources>

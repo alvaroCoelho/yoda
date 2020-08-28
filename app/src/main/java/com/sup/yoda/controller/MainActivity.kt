@@ -1,6 +1,7 @@
 package com.sup.yoda.controller
 
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
@@ -21,14 +22,15 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var editTextEmail: EditText
     private lateinit var buttonStart: Button
-    private  lateinit var gifYodaHello: ImageView
-
+    private lateinit var gifYodaHello: ImageView
+    private lateinit var editextCode: EditText
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         editTextEmail = findViewById(R.id.editTextTextEmailAddress)
+        editextCode = findViewById(R.id.editTextNumberCodeVerification)
         buttonStart = findViewById(R.id.buttonStart)
 
         gifYodaHello = findViewById(R.id.imageViewYodaHello)
@@ -61,40 +63,74 @@ class MainActivity : AppCompatActivity() {
                                 var json = JSONObject(responseData)
                                 println("Request Successful!!")
                                 println(json)
-                                var user = User(json.getString("id").toInt(), json.getString("name"),json.getString("email"))
 
+                                var user = User(
+                                    json.getString("id").toInt(), json.getString("zendesk_id"),
+                                    json.getString("name"), json.getString("email")
+                                )
+
+                                if (user.idZendesk.equals(editextCode.text.toString())) {
+                                    val sharedPref =
+                                        this@MainActivity?.getPreferences(Context.MODE_PRIVATE)
+                                            ?: return
+                                    with(sharedPref.edit()) {
+                                        putBoolean(getString(R.string.authenticated_user), true)
+                                        commit()
+                                    }
 
                                     Thread(Runnable {
                                         this@MainActivity.runOnUiThread(java.lang.Runnable {
-                                            val intent = Intent(this@MainActivity, HomeActivity::class.java)
+
+                                            val intent =
+                                                Intent(this@MainActivity, HomeActivity::class.java)
                                             startActivity(intent)
-                                            Toast.makeText(this@MainActivity, getString(R.string.welcome), Toast.LENGTH_LONG).show()
+                                            finish()
+                                            Toast.makeText(
+                                                this@MainActivity,
+                                                getString(R.string.welcome),
+                                                Toast.LENGTH_LONG
+                                            ).show()
                                         })
                                     }).start()
+
+                                } else {
+
+                                    Thread(Runnable {
+                                        this@MainActivity.runOnUiThread(java.lang.Runnable {
+                                            Toast.makeText(
+                                                this@MainActivity,
+                                                getString(R.string.invalid_user),
+                                                Toast.LENGTH_LONG
+                                            ).show()
+                                        })
+                                    }).start()
+
+                                }
 
 
                             } catch (e: JSONException) {
                                 e.printStackTrace()
                             }
 
-                        }else{
+
+                        } else {
                             Thread(Runnable {
                                 this@MainActivity.runOnUiThread(java.lang.Runnable {
-                                  Toast.makeText(this@MainActivity, getString(R.string.invalid_user), Toast.LENGTH_LONG).show()
+                                    Toast.makeText(
+                                        this@MainActivity,
+                                        getString(R.string.invalid_user),
+                                        Toast.LENGTH_LONG
+                                    ).show()
                                 })
                             }).start()
                         }
                     }
 
-
                 })
-
-
 
             } catch (e: JSONException) {
                 e.printStackTrace()
             }
-
 
         }
     }

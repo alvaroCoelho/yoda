@@ -1,17 +1,26 @@
 package com.sup.yoda.model
 
+import android.content.Context
 import com.sup.yoda.dao.UserDAO
 
 
-open class User () {
+open class User (id_user: Int, name_user:String, email_user: String) {
 
-    var id: Int = 0
-    lateinit var nome: String
-    lateinit var email: String
-    lateinit var userDao: UserDAO
+    internal var id: Int
+    internal var nome: String
+    internal var email: String
 
 
-    fun save(user:User){
+    init {
+        this.id = id_user
+        this.nome = name_user
+        this.email = email_user
+
+    }
+
+
+    fun save(user:User, context: Context){
+        val userDao: UserDAO = UserDAO(context)
         userDao.insertUser(user.nome, user.email)
     }
 

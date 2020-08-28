@@ -13,7 +13,7 @@
         android:layout_marginStart="80dp"
         android:layout_marginTop="80dp"
         android:ems="10"
-        android:hint="@string/digite_email"
+        android:hint="@string/type_it_email"
         android:inputType="textEmailAddress"
         android:outlineAmbientShadowColor="@color/colorPrimary"
         android:textAlignment="center"

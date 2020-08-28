@@ -3,6 +3,7 @@ package com.sup.yoda.controller
 
 import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
@@ -38,6 +39,15 @@ class MainActivity : AppCompatActivity() {
             .load(R.drawable.yodahello)
             .placeholder(R.drawable.yodahello)
             .into(gifYodaHello);
+
+
+        val sharedPref: SharedPreferences = getSharedPreferences(getString(R.string.authenticated_user), MODE_PRIVATE)
+        if (sharedPref.getBoolean(getString(R.string.authenticated_user), true)) {
+            val homeIntent = Intent(this, HomeActivity::class.java)
+            startActivity(homeIntent)
+            finish()
+
+        }
 
         buttonStart.setOnClickListener {
 

@@ -35,7 +35,7 @@ class HomeActivity : AppCompatActivity() {
 
 
         val sharedPref: SharedPreferences = getSharedPreferences(getString(R.string.authenticated_user), MODE_PRIVATE)
-        if (sharedPref.getBoolean(getString(R.string.authenticated_user), true)) {
+        if (sharedPref.getBoolean(getString(R.string.authenticated_user), false)) {
             val homeIntent = Intent(this, MainActivity::class.java)
             startActivity(homeIntent)
             finish()
@@ -94,6 +94,16 @@ class HomeActivity : AppCompatActivity() {
 
 
         }
+
+        btnFeedback.setOnClickListener { it
+
+            val intent =
+                Intent(this, FeedbackActivity::class.java)
+            startActivity(intent)
+            finish()
+
+        }
+
 
 
     }

@@ -20,6 +20,7 @@
         </activity>
 
         <activity android:name=".controller.HomeActivity"/>
+        <activity android:name=".controller.FeedbackActivity"/>
     </application>
 
 </manifest>

@@ -8,4 +8,9 @@
     <string name="type_it_code">Código digite seu:</string>
     <string name="what_you_do">Fazer deseja o que?</string>
     <string name="send_feedback">Feedback mandar</string>
+    <string name="send">Enviar</string>
+    <string name="choice_person">Colega você deve escolher</string>
+    <string name="better">Melhorar</string>
+    <string name="anonymous">Anônimo</string>
+    <string name="continues">continuar</string>
 </resources>

@@ -18,6 +18,7 @@ class FeedbackActivity : AppCompatActivity() {
     private lateinit var buttonSendFeedback: Button
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.send_feedback)
@@ -34,6 +35,8 @@ class FeedbackActivity : AppCompatActivity() {
         switchTypeBetter = findViewById(R.id.switchTypeBetter)
         switchTypeContinue = findViewById(R.id.switchTypeContinue)
         buttonSendFeedback = findViewById(R.id.buttonSendFeedback)
+
+
 
 
 

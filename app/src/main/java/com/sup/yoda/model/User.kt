@@ -26,8 +26,10 @@ open class User (id_user: Int, idZendesk: String, name_user:String, email_user: 
         userDao.insertUser(id_user,idZendesk, name_user,email_user)
     }
 
-    fun delete(id:Int){
+
+    fun getList(context: Context): ArrayList<User>{
+         val userDao: UserDAO = UserDAO(context)
+        return  userDao.getListUsers()
 
     }
-
 }

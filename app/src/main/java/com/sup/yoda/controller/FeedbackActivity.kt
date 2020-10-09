@@ -2,6 +2,7 @@ package com.sup.yoda.controller
 
 import android.os.Bundle
 import android.os.PersistableBundle
+import android.view.View
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
@@ -45,8 +46,34 @@ class FeedbackActivity : AppCompatActivity() {
 
         spinnerUsers!!.setAdapter(arrayAdapter)
 
+            spinnerUsers.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                    // You can define you actions as you want
+                }
+
+                override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
+
+                    userNew = spinnerUsers.selectedItem as User
+
+                }
+            }
+
+        switchTypeBetter.setOnCheckedChangeListener { _, isChecked ->
+                    if (isChecked){
+                        switchTypeContinue!!.isChecked=false
+                          }
+
+            }
+
+        switchTypeContinue.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+                switchTypeBetter!!.isChecked=false
+            }
+
+            }
 
     }
 
 }
+

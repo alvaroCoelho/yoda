@@ -28,7 +28,7 @@ class UserDAO(context:Context){
 
         val users = ArrayList<User>()
 
-        val selectQuery = "SELECT  * FROM $UserContract.UserTable.TABLE_NAME"
+        val selectQuery = "SELECT * FROM ${UserContract.UserTable.TABLE_NAME}"
 
 
         val cursor = db.rawQuery(selectQuery, null)

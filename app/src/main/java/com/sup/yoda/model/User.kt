@@ -20,6 +20,9 @@ open class User (id_user: Int, idZendesk: String, name_user:String, email_user: 
 
     }
 
+    override fun toString(): String {
+        return nome
+    }
 
     fun save(id_user: Int, idZendesk: String, name_user:String, email_user: String, context: Context){
         val userDao: UserDAO = UserDAO(context)

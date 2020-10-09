@@ -6,6 +6,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.sup.yoda.R
+import com.sup.yoda.model.User
 
 class FeedbackActivity : AppCompatActivity() {
 
@@ -36,8 +37,13 @@ class FeedbackActivity : AppCompatActivity() {
         switchTypeContinue = findViewById(R.id.switchTypeContinue)
         buttonSendFeedback = findViewById(R.id.buttonSendFeedback)
 
+        var userNew: User = User(0,"","","")
+
+        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, userNew.getList(this))
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
 
+        spinnerUsers!!.setAdapter(arrayAdapter)
 
 
 

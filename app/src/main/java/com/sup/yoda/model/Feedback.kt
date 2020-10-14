@@ -1,26 +1,37 @@
 package com.sup.yoda.model
 
-open class Feedback(id: Int, id_user_for:Int, name_user_for:String, id_user_from:Int,
-                    name_user_from:String, message:String, type:String, isAnonymous:Int ){
+import android.content.Context
+import com.sup.yoda.dao.FeedbackDAO
+
+open class Feedback(id: Int, idUserFor:Int, nameUserFor:String, idUserFrom:Int,
+                    nameUserFrom:String, message:String, type:String, isAnonymous:Int ){
 
     internal var id:Int
-    internal var id_user_for:Int
-    internal var name_user_for:String
-    internal var id_user_from:Int
-    internal var name_user_from:String
+    internal var idUserFor:Int
+    internal var nameUserFor:String
+    internal var idUserFrom:Int
+    internal var nameUserFrom:String
     internal var message:String
     internal var type:String
     internal var isAnonymous:Int
 
     init {
         this.id = id
-        this.id_user_for = id_user_for
-        this.name_user_for = name_user_for
-        this.id_user_from = id_user_from
-        this.name_user_from = name_user_from
+        this.idUserFor = idUserFor
+        this.nameUserFor = nameUserFor
+        this.idUserFrom = idUserFrom
+        this.nameUserFrom = nameUserFrom
         this.message = message
         this.type = type
         this.isAnonymous = isAnonymous
+    }
+
+    fun save(id: Int, idUserFor:Int, nameUserFor:String, idUserFrom:String,
+             nameUserFrom:String, message:String, type:String, isAnonymous:Int , context: Context){
+        val feedbackDao: FeedbackDAO = FeedbackDAO(context)
+        feedbackDao.insertFeedback(id, idUserFor, nameUserFor, idUserFrom,
+            nameUserFrom, message, type, isAnonymous)
+
     }
 
 }

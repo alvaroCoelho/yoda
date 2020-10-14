@@ -5,6 +5,8 @@
     <string name="invalid_user">Encontrado foi não você!</string>
     <string name="welcome">Vindo Bem Seja!</string>
     <string name="authenticated_user">AUTHENTICATED_USER</string>
+    <string name="id_user">ID_USER</string>
+    <string name="name_user">NAME_USER</string>
     <string name="type_it_code">Código digite seu:</string>
     <string name="what_you_do">Fazer deseja o que?</string>
     <string name="send_feedback">Feedback mandar</string>

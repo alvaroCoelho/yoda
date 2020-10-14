@@ -3,13 +3,13 @@ package com.sup.yoda.model
 import android.content.Context
 import com.sup.yoda.dao.FeedbackDAO
 
-open class Feedback(id: Int, idUserFor:Int, nameUserFor:String, idUserFrom:Int,
+open class Feedback(id: Int, idUserFor:String, nameUserFor:String, idUserFrom:String,
                     nameUserFrom:String, message:String, type:String, isAnonymous:Int ){
 
     internal var id:Int
-    internal var idUserFor:Int
+    internal var idUserFor:String
     internal var nameUserFor:String
-    internal var idUserFrom:Int
+    internal var idUserFrom:String
     internal var nameUserFrom:String
     internal var message:String
     internal var type:String

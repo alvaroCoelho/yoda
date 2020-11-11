@@ -44,16 +44,17 @@ class FeedbackActivity : AppCompatActivity() {
         switchTypeContinue = findViewById(R.id.switchTypeContinue)
         buttonSendFeedback = findViewById(R.id.buttonSendFeedback)
 
-        var userNew: User = User(0,"","","")
+        var userNew: User = User(0,"",getString(R.string.select_user),"")
 
       val sharedPref: SharedPreferences = getSharedPreferences(getString(R.string.authenticated_user), MODE_PRIVATE)
 
         var feedbackNew: Feedback = Feedback(0,"","",sharedPref.getInt(getString(R.string.id_user),0).toString(),
                  sharedPref.getString(getString(R.string.name_user),"") ?: "Not Set","","",0)
 
-
-
-        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, userNew.getList(this))
+        val listUser: ArrayList<User> = ArrayList<User>()
+            listUser.add(userNew)
+            listUser.addAll(userNew.getList(this))
+        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item,listUser)
         arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
 
@@ -62,7 +63,7 @@ class FeedbackActivity : AppCompatActivity() {
             spinnerUsers.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
-                    // You can define you actions as you want
+
                 }
 
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
@@ -99,7 +100,21 @@ class FeedbackActivity : AppCompatActivity() {
 
         buttonSendFeedback.setOnClickListener { it
 
+            if(userNew.id == 0){
+                Toast.makeText(this,getString(R.string.without_user),Toast.LENGTH_LONG).show()
+            }else if(editTextFeedback.text.toString().trim().isEmpty()) {
+                    Toast.makeText(this, getString(R.string.without_message), Toast.LENGTH_LONG).show()
+                  }else if (!switchTypeBetter.isChecked && !switchTypeContinue.isChecked ) {
+                Toast.makeText(this, getString(R.string.without_type), Toast.LENGTH_LONG).show()
+            }else{
+                val intent =
+                    Intent(this@FeedbackActivity, HomeActivity::class.java)
+                startActivity(intent)
+                finish()
+            }
 
+
+/*
             val payload = "test payload"
 
             val okHttpClient = OkHttpClient()
@@ -111,15 +126,14 @@ class FeedbackActivity : AppCompatActivity() {
             okHttpClient.newCall(request).enqueue(object : Callback {
                 override fun onFailure(call: Call, e: IOException) {
                     // Handle this
-                }
+                }*/
 
-                override fun onResponse(call: Call, response: Response) {
-                    val intent =
-                        Intent(this@FeedbackActivity, HomeActivity::class.java)
-                    startActivity(intent)
-                    finish()
-                }
-            })
+             /*   override fun onResponse(call: Call, response: Response) {*/
+
+
+
+      /*          }
+            })*/
 
 
 

@@ -10,7 +10,7 @@ class FeedbackDAO(context: Context){
 
 
     fun insertFeedback(id: Int, idUserFor:Int, nameUserFor:String, idUserFrom:String,
-                       nameUserFrom:String, message:String, type:String, isAnonymous:Int){
+                       nameUserFrom:String, message:String, type:String, isAnonymous:Int, date:String){
 
         val values = ContentValues().apply {
             put(FeedbackContract.FeedbackTable.COLUMN_NAME_ID, id.toString())

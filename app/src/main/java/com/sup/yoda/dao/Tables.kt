@@ -23,6 +23,7 @@ object FeedbackContract {
         const val COLUMN_NAME_MESSAGE = "message"
         const val COLUMN_NAME_TYPE = "type"
         const val COLUMN_NAME_IS_ANONYMOUS = "isAnonymous"
+        const val COLUMN_NAME_DATE = "date"
     }
 }
 
@@ -45,6 +46,7 @@ const val SQL_CREATE_TABLE_FEEDBACK =
             "${FeedbackContract.FeedbackTable.COLUMN_NAME_NAME_USER_FROM} TEXT," +
             "${FeedbackContract.FeedbackTable.COLUMN_NAME_MESSAGE} TEXT," +
             "${FeedbackContract.FeedbackTable.COLUMN_NAME_TYPE} TEXT," +
-            "${FeedbackContract.FeedbackTable.COLUMN_NAME_IS_ANONYMOUS} INTEGER)"
+            "${FeedbackContract.FeedbackTable.COLUMN_NAME_IS_ANONYMOUS} INTEGER," +
+            "${FeedbackContract.FeedbackTable.COLUMN_NAME_DATE} TEXT)"
 
 const val SQL_DELETE_TABLE_FEEDBACK = "DROP TABLE IF EXISTS ${FeedbackContract.FeedbackTable.TABLE_NAME}"

@@ -15,4 +15,9 @@
     <string name="better">Melhorar</string>
     <string name="anonymous">Anônimo</string>
     <string name="continues">Continuar</string>
+    <string name="select_user">Selecione o colega</string>
+    <string name="without_message">Sem Mensagem?!?!?</string>
+    <string name="without_type">Sem o tipo?!?!?</string>
+    <string name="without_user">Sem o colega?!?!?</string>
+
 </resources>

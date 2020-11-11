@@ -1,5 +1,6 @@
 package com.sup.yoda.controller
 
+import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.os.PersistableBundle
@@ -10,6 +11,9 @@ import com.bumptech.glide.Glide
 import com.sup.yoda.R
 import com.sup.yoda.model.Feedback
 import com.sup.yoda.model.User
+import okhttp3.*
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.IOException
 
 class FeedbackActivity : AppCompatActivity() {
 
@@ -42,9 +46,9 @@ class FeedbackActivity : AppCompatActivity() {
 
         var userNew: User = User(0,"","","")
 
-        val sharedPref: SharedPreferences = getSharedPreferences(getString(R.string.authenticated_user), MODE_PRIVATE)
+      val sharedPref: SharedPreferences = getSharedPreferences(getString(R.string.authenticated_user), MODE_PRIVATE)
 
-        var feedbackNew:Feedback = Feedback(0,"","",sharedPref.getInt(getString(R.string.id_user),0).toString(),
+        var feedbackNew: Feedback = Feedback(0,"","",sharedPref.getInt(getString(R.string.id_user),0).toString(),
                  sharedPref.getString(getString(R.string.name_user),"") ?: "Not Set","","",0)
 
 
@@ -64,13 +68,15 @@ class FeedbackActivity : AppCompatActivity() {
                 override fun onItemSelected(p0: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
 
                     userNew = spinnerUsers.selectedItem as User
-
+                    feedbackNew.idUserFor = userNew.id.toString()
+                    feedbackNew.nameUserFor = userNew.nome
                 }
             }
 
         switchTypeBetter.setOnCheckedChangeListener { _, isChecked ->
                     if (isChecked){
                         switchTypeContinue!!.isChecked=false
+                        feedbackNew.type = getString(R.string.better)
                           }
 
             }
@@ -78,11 +84,42 @@ class FeedbackActivity : AppCompatActivity() {
         switchTypeContinue.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked){
                 switchTypeBetter!!.isChecked=false
+                feedbackNew.type = getString(R.string.continues)
             }
 
             }
+
+
+        switchAnonymous.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked){
+               feedbackNew.isAnonymous = 1
+            }
+
+        }
 
         buttonSendFeedback.setOnClickListener { it
+
+
+            val payload = "test payload"
+
+            val okHttpClient = OkHttpClient()
+            val requestBody = payload.toRequestBody()
+            val request = Request.Builder()
+                .method("POST", requestBody)
+                .url("url")
+                .build()
+            okHttpClient.newCall(request).enqueue(object : Callback {
+                override fun onFailure(call: Call, e: IOException) {
+                    // Handle this
+                }
+
+                override fun onResponse(call: Call, response: Response) {
+                    val intent =
+                        Intent(this@FeedbackActivity, HomeActivity::class.java)
+                    startActivity(intent)
+                    finish()
+                }
+            })
 
 
 

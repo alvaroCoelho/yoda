@@ -49,7 +49,7 @@ class FeedbackActivity : AppCompatActivity() {
       val sharedPref: SharedPreferences = getSharedPreferences(getString(R.string.authenticated_user), MODE_PRIVATE)
 
         var feedbackNew: Feedback = Feedback(0,"","",sharedPref.getInt(getString(R.string.id_user),0).toString(),
-                 sharedPref.getString(getString(R.string.name_user),"") ?: "Not Set","","",0)
+                 sharedPref.getString(getString(R.string.name_user),"") ?: "Not Set","","",0,"")
 
         val listUser: ArrayList<User> = ArrayList<User>()
             listUser.add(userNew)

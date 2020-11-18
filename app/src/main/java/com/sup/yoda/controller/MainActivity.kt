@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.preference.PreferenceManager
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
@@ -41,7 +42,11 @@ class MainActivity : AppCompatActivity() {
             .into(gifYodaHello);
 
 
-        val sharedPref: SharedPreferences = getSharedPreferences(getString(R.string.authenticated_user), MODE_PRIVATE)
+
+        val sharedPref: SharedPreferences = getSharedPreferences(
+            getString(R.string.authenticated_user),
+            MODE_PRIVATE
+        )
         if (sharedPref.getBoolean(getString(R.string.authenticated_user), true)) {
             val homeIntent = Intent(this, HomeActivity::class.java)
             startActivity(homeIntent)
@@ -86,7 +91,7 @@ class MainActivity : AppCompatActivity() {
                                     with(sharedPref.edit()) {
                                         putBoolean(getString(R.string.authenticated_user), true)
                                         putInt(getString(R.string.id_user), user.id)
-                                        putString(getString(R.string.name_user),user.nome)
+                                        putString(getString(R.string.name_user), user.nome)
                                         commit()
                                     }
 

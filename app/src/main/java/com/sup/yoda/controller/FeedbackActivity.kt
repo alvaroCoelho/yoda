@@ -1,5 +1,6 @@
 package com.sup.yoda.controller
 
+import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -13,6 +14,7 @@ import com.sup.yoda.model.Feedback
 import com.sup.yoda.model.User
 import okhttp3.*
 import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 import java.io.IOException
 
 class FeedbackActivity : AppCompatActivity() {
@@ -46,10 +48,12 @@ class FeedbackActivity : AppCompatActivity() {
 
         var userNew: User = User(0,"",getString(R.string.select_user),"")
 
-      val sharedPref: SharedPreferences = getSharedPreferences(getString(R.string.authenticated_user), MODE_PRIVATE)
+        val sharedPref = this@FeedbackActivity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        val idUserFrom = sharedPref.getInt((getString(R.string.id_user)), 0)
+        val nameUserFrom: String = sharedPref.getString(getString(R.string.name_user),"user").toString()
 
-        var feedbackNew: Feedback = Feedback(0,"","",sharedPref.getInt(getString(R.string.id_user),0).toString(),
-                 sharedPref.getString(getString(R.string.name_user),"") ?: "Not Set","","",0,"")
+        var feedbackNew: Feedback = Feedback(0,"","",idUserFrom.toString(),
+                 nameUserFrom.toString(),"","",0,"")
 
         val listUser: ArrayList<User> = ArrayList<User>()
             listUser.add(userNew)
@@ -106,35 +110,42 @@ class FeedbackActivity : AppCompatActivity() {
                     Toast.makeText(this, getString(R.string.without_message), Toast.LENGTH_LONG).show()
                   }else if (!switchTypeBetter.isChecked && !switchTypeContinue.isChecked ) {
                 Toast.makeText(this, getString(R.string.without_type), Toast.LENGTH_LONG).show()
+
             }else{
-                val intent =
-                    Intent(this@FeedbackActivity, HomeActivity::class.java)
-                startActivity(intent)
-                finish()
+
+                feedbackNew.message = editTextFeedback.text.toString();
+
+                val rootObject= JSONObject()
+                rootObject.put("id_user_for",feedbackNew.idUserFor)
+                rootObject.put("name_user_for",feedbackNew.nameUserFor)
+                rootObject.put("message",feedbackNew.message)
+                rootObject.put("id_user_from",feedbackNew.idUserFrom)
+                rootObject.put("id_user_from",feedbackNew.nameUserFrom)
+                rootObject.put("type", feedbackNew.type)
+                rootObject.put("is_anonymous", feedbackNew.isAnonymous)
+                rootObject.put("date","25")
+
+                val okHttpClient = OkHttpClient()
+                val requestBody = rootObject.toString().toRequestBody()
+                val request = Request.Builder()
+                    .method("POST", requestBody)
+                    .url("https://yoda-api.agilepromoter.com/v1/support/app/feedback")
+                    .build()
+                okHttpClient.newCall(request).enqueue(object : Callback {
+                    override fun onFailure(call: Call, e: IOException) {
+                        Toast.makeText(this@FeedbackActivity, getString(R.string.error_send_feedback), Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun onResponse(call: Call, response: Response) {
+                        println("POST---------------------------------------${response.toString()}");
+                        val intent = Intent(this@FeedbackActivity, HomeActivity::class.java)
+                        startActivity(intent)
+                        finish()
+                    }
+               })
+
+
             }
-
-
-/*
-            val payload = "test payload"
-
-            val okHttpClient = OkHttpClient()
-            val requestBody = payload.toRequestBody()
-            val request = Request.Builder()
-                .method("POST", requestBody)
-                .url("url")
-                .build()
-            okHttpClient.newCall(request).enqueue(object : Callback {
-                override fun onFailure(call: Call, e: IOException) {
-                    // Handle this
-                }*/
-
-             /*   override fun onResponse(call: Call, response: Response) {*/
-
-
-
-      /*          }
-            })*/
-
 
 
         }

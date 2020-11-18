@@ -10,20 +10,19 @@
         android:id="@+id/imageViewYodaHello"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="64dp"
         android:layout_marginTop="76dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        />
-
+        app:srcCompat="@drawable/yodahello"/>
 
 
     <EditText
         android:id="@+id/editTextTextEmailAddress"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="64dp"
         android:ems="10"
         android:hint="@string/type_it_email"
         android:inputType="textEmailAddress"
@@ -38,27 +37,27 @@
         android:id="@+id/editTextNumberCodeVerification"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="80dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="36dp"
         android:ems="10"
         android:hint="@string/type_it_code"
         android:inputType="number"
         android:outlineAmbientShadowColor="@color/colorPrimary"
-        android:textColor="@color/colorPrimary"
         android:textAlignment="center"
+        android:textColor="@color/colorPrimary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextTextEmailAddress" />
 
-
     <Button
         android:id="@+id/buttonStart"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginTop="36dp"
         android:background="@color/colorAccent"
         android:text="@string/start"
         android:textColor="@color/colorWhite"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextNumberCodeVerification" />
 

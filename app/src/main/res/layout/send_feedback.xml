@@ -32,7 +32,7 @@
         android:layout_width="394dp"
         android:layout_height="66dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
@@ -49,13 +49,13 @@
         app:layout_constraintTop_toBottomOf="@+id/spinnerUsers" />
 
     <Switch
-        android:id="@+id/switchAnonymous"
+        android:id="@+id/switchTypeContinue"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="272dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/anonymous"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/continues"
+        app:layout_constraintStart_toEndOf="@+id/switchTypeBetter"
         app:layout_constraintTop_toBottomOf="@+id/editTextFeedback" />
 
     <Switch
@@ -63,33 +63,33 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="36dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="4dp"
         android:text="@string/better"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextFeedback" />
 
     <Switch
-        android:id="@+id/switchTypeContinue"
+        android:id="@+id/switchAnonymous"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="12dp"
-        android:layout_marginTop="32dp"
-        android:text="@string/continues"
-        app:layout_constraintStart_toEndOf="@+id/switchTypeBetter"
+        android:layout_marginStart="272dp"
+        android:layout_marginTop="4dp"
+        android:text="@string/anonymous"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextFeedback" />
 
     <Button
         android:id="@+id/buttonSendFeedback"
-        android:layout_width="173dp"
-        android:layout_height="44dp"
-        android:layout_marginEnd="116dp"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="104dp"
         android:layout_marginBottom="4dp"
         android:background="@color/colorAccent"
         android:text="@string/send"
         android:textColor="@color/colorWhite"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageViewYodaPresent"
-        app:layout_constraintVertical_bias="0.52" />
+        app:layout_constraintVertical_bias="0.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

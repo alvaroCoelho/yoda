@@ -6,7 +6,7 @@ import android.database.sqlite.SQLiteOpenHelper
 class DataBase(context: Context) : SQLiteOpenHelper(context, DATABASE_NAME, null, DATABASE_VERSION) {
 
     companion object {
-        const val DATABASE_VERSION = 3
+        const val DATABASE_VERSION = 4
         const val DATABASE_NAME = "YODA.db"
     }
 

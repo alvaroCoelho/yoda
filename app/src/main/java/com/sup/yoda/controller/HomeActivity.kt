@@ -34,13 +34,11 @@ class HomeActivity : AppCompatActivity() {
             .into(yodaWhatGif);
 
 
-        val sharedPref: SharedPreferences = getSharedPreferences(getString(R.string.authenticated_user), MODE_PRIVATE)
-        if (sharedPref.getBoolean(getString(R.string.authenticated_user), false)) {
-            val homeIntent = Intent(this, MainActivity::class.java)
-            startActivity(homeIntent)
-            finish()
+        var userLogged: User = User(0,"",getString(R.string.select_user),"",0)
+        userLogged.getUserLogged(this)
 
-        } else {
+
+        if (userLogged.isLogged != 1) {
 
             try {
 
@@ -67,10 +65,18 @@ class HomeActivity : AppCompatActivity() {
 
                                 for(i in 0 until size-1){
                                     var jsonObjectdetail:JSONObject = jsonArray.getJSONObject(i)
-                                 var userNew:User = User(0,"","","")
-                                     userNew.save(jsonObjectdetail.getInt("id"), jsonObjectdetail.getString("zendesk_id"),
-                                         jsonObjectdetail.getString("name"),jsonObjectdetail.getString("email"),this@HomeActivity)
 
+                                        if(userLogged.idZendesk != jsonObjectdetail.getString("zendesk_id")) {
+                                            var userNew: User = User(0, "", "", "", 0)
+                                            userNew.save(
+                                                jsonObjectdetail.getInt("id"),
+                                                jsonObjectdetail.getString("zendesk_id"),
+                                                jsonObjectdetail.getString("name"),
+                                                jsonObjectdetail.getString("email"),
+                                                0,
+                                                this@HomeActivity
+                                            )
+                                        }
                                 }
 
 
@@ -100,7 +106,7 @@ class HomeActivity : AppCompatActivity() {
             val intent =
                 Intent(this, FeedbackActivity::class.java)
             startActivity(intent)
-            finish()
+
 
         }
 

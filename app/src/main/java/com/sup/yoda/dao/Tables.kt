@@ -9,6 +9,7 @@ object UserContract {
         const val COLUMN_NAME_ID_ZENDESK = "id_zendesk"
         const val COLUMN_NAME_NAME = "name"
         const val COLUMN_NAME_EMAIL = "email"
+        const val COLUMN_IS_LOGGED = "is_logged"
     }
 }
 
@@ -32,7 +33,8 @@ object FeedbackContract {
               "${UserContract.UserTable.COLUMN_NAME_ID} TEXT," +
               "${UserContract.UserTable.COLUMN_NAME_ID_ZENDESK} TEXT," +
               "${UserContract.UserTable.COLUMN_NAME_NAME} TEXT," +
-              "${UserContract.UserTable.COLUMN_NAME_EMAIL} TEXT)"
+              "${UserContract.UserTable.COLUMN_NAME_EMAIL} TEXT," +
+              "${UserContract.UserTable.COLUMN_IS_LOGGED} INTEGER)"
 
 const val SQL_DELETE_TABLE_USER = "DROP TABLE IF EXISTS ${UserContract.UserTable.TABLE_NAME}"
 

@@ -41,18 +41,19 @@ class MainActivity : AppCompatActivity() {
             .placeholder(R.drawable.yodahello)
             .into(gifYodaHello);
 
+        var userNew: User = User(0,"","","",0)
+        var userLogged:User = userNew.getUserLogged(this)
 
-
-        val sharedPref: SharedPreferences = getSharedPreferences(
-            getString(R.string.authenticated_user),
-            MODE_PRIVATE
-        )
-        if (sharedPref.getBoolean(getString(R.string.authenticated_user), true)) {
-            val homeIntent = Intent(this, HomeActivity::class.java)
-            startActivity(homeIntent)
+        if (userLogged.isLogged == 1) {
+            val intent =
+                Intent(this, HomeActivity::class.java)
+            startActivity(intent)
             finish()
 
-        }
+            }
+
+
+
 
         buttonStart.setOnClickListener {
 
@@ -81,19 +82,14 @@ class MainActivity : AppCompatActivity() {
 
                                 var user = User(
                                     json.getString("id").toInt(), json.getString("zendesk_id"),
-                                    json.getString("name"), json.getString("email")
-                                )
+                                    json.getString("name"), json.getString("email"),0)
+
 
                                 if (user.idZendesk.equals(editextCode.text.toString())) {
-                                    val sharedPref =
-                                        this@MainActivity?.getPreferences(Context.MODE_PRIVATE)
-                                            ?: return
-                                    with(sharedPref.edit()) {
-                                        putBoolean(getString(R.string.authenticated_user), true)
-                                        putInt(getString(R.string.id_user), user.id)
-                                        putString(getString(R.string.name_user), user.nome)
-                                        commit()
-                                    }
+
+                                    user.save(json.getString("id").toInt(), json.getString("zendesk_id"),
+                                        json.getString("name"), json.getString("email"),1,this@MainActivity )
+
 
                                     Thread(Runnable {
                                         this@MainActivity.runOnUiThread(java.lang.Runnable {
